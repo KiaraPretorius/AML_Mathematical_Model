@@ -4,10 +4,10 @@ This repository contains MATLAB code for a mathematical model investigating bone
 
 Model:
 The model consists of four coupled ODEs representing:
-H: Healthy myeloblasts
-S: Cytarabine-sensitive AML blasts
-R: Cytarabine-resistant AML blasts
-B: Other healthy bone marrow cells
+H- Healthy myeloblasts,
+S- Cytarabine-sensitive AML blasts,
+R- Cytarabine-resistant AML blasts,
+B- Other healthy bone marrow cells.
 
 Executing the code:
 The MATLAB script AML_Model_Final.m can be executed through GitHub using the Run AML MATLAB Model workflow. The system is solved using MATLAB's ode45 solver over a specified simulation period of 17520 hours. Chemotherapy initiation times are specified manually.
