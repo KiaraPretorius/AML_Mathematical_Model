@@ -1,5 +1,3 @@
-clear
-clc
 close all
 
 % White backgrounds for figures
@@ -36,16 +34,16 @@ p.phi = 0.2497;
 
 % Initial conditions:
 % H, S, R, B
-y0 = [0.02; 0.10; 0.01; 0.87];
+y0 = [0.05; 0.10; 0.01; 0.84];
 tEnd = 17520;
 
 
 % Chemotherapy settings:
-chemoON = true;
+chemoON = false;
 secondChemoON = false;
-chemoStart1 = 357.6374;
+chemoStart1 = 309.9656;
 chemoEnd1 = chemoStart1 + 168;
-chemoStart2 = 5287.8622;
+chemoStart2 = 5280.0388;
 chemoEnd2 = chemoStart2 + 168;
 
 opts = odeset('RelTol',1e-9,'AbsTol',1e-12, ...
@@ -112,16 +110,26 @@ end
 
 % Figure 1: Four populations
 figure(1)
-plot(t,H,'b-','LineWidth',1.5)
+h1 = plot(t,H,'b-','LineWidth',1.5);
 hold on
-plot(t,S,'m-','LineWidth',1.5)
-plot(t,R,'r-','LineWidth',1.5)
-plot(t,B,'-','Color',[0.08 0.61 0.40],'LineWidth',1.5)
+h2 = plot(t,S,'m-','LineWidth',1.5);
+h3 = plot(t,R,'r-','LineWidth',1.5);
+h4 = plot(t,B,'-','Color',[0.08 0.61 0.40],'LineWidth',1.5);
 xlabel('Time (hours)')
 ylabel('Normalised population')
 title('Bone Marrow Population Dynamics in Acute Myeloid Leukaemia')
-legend('H','S','R','B','Location','best')
+ylim([0 1])
 grid on
+if chemoON
+    h5 = xregion(chemoStart1,chemoEnd1,'FaceColor',[0.7 0.7 0.7],'FaceAlpha',0.5);
+    if secondChemoON
+        xregion(chemoStart2,chemoEnd2,'FaceColor',[0.7 0.7 0.7],'FaceAlpha',0.5, ...
+            'HandleVisibility','off');
+    end
+    legend([h1 h2 h3 h4 h5],{'H','S','R','B','C'},'Location','eastoutside')
+else
+    legend([h1 h2 h3 h4],{'H','S','R','B'},'Location','eastoutside')
+end
 
 % Figure 2: Total marrow population
 figure(2)
@@ -144,7 +152,7 @@ plot(t,100*B./max(N,eps),'-','Color',[0.08 0.61 0.40],'LineWidth',1.5)
 xlabel('Time (hours)')
 ylabel('Percentage of modelled BM cells (%)')
 title('Relative Bone Marrow Cell Composition')
-legend('H','S','R','B','Location','best')
+legend('H','S','R','B','Location','eastoutside')
 ylim([0 100])
 grid on
 
