@@ -25,8 +25,10 @@ p.beta_S = 0.05020;
 p.beta_R = 0.00170;
 p.beta_B = 0.00677;
 
-% Unitless parameter values
+% Sensitive-to-resistant transition rate (h^-1)
 p.alpha = 2.21176e-9;
+
+% Unitless parameter values
 p.K = 1;
 p.H0 = 0.05;
 p.phi = 0.2497;
